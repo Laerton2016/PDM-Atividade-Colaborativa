@@ -62,13 +62,16 @@ public class AbastecimentoDAO {
         SQLiteDatabase db = helperDao.getReadableDatabase();
         String[] params = {id.toString()};
         Cursor cursor = db.rawQuery(sql, params);
-        Abastecimento abastecimento = dadosDoAbastecimento(cursor);
+        Abastecimento abastecimento = null;
+        if(cursor.moveToFirst()) {
+            abastecimento = dadosDoAbastecimento(cursor);
+        }
         return abastecimento;
     }
 
     private ContentValues pegaDadosDoAbastecimento(Abastecimento abastecimento) {
         ContentValues dados = new ContentValues();
-        dados.put("tipo_combustivel", abastecimento.getTipoDeCombustivel().getDescricao());
+        dados.put("tipo_combustivel", abastecimento.getTipoDeCombustivel().toString());
         dados.put("qtde_litros", abastecimento.getQtdeLitros());
         dados.put("valor_litro", abastecimento.getValorLitro());
         dados.put("valor_pago", abastecimento.getValorPago());

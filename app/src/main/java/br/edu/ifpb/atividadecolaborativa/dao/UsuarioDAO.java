@@ -50,7 +50,10 @@ public class UsuarioDAO {
         SQLiteDatabase db = helperDao.getReadableDatabase();
         String[] params = {id.toString()};
         Cursor cursor = db.rawQuery(sql, params);
-        Usuario usuario = dadosDoUsuario(cursor);
+        Usuario usuario = null;
+        if(cursor.moveToFirst()){
+            usuario = dadosDoUsuario(cursor);
+        }
         return usuario;
     }
 
@@ -59,7 +62,10 @@ public class UsuarioDAO {
         SQLiteDatabase db = helperDao.getReadableDatabase();
         String[] params = {email, senha};
         Cursor cursor = db.rawQuery(sql, params);
-        Usuario usuario = dadosDoUsuario(cursor);
+        Usuario usuario = null;
+        if(cursor.moveToFirst()){
+            usuario = dadosDoUsuario(cursor);
+        }
         return usuario;
     }
 

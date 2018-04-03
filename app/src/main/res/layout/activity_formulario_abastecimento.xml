@@ -24,10 +24,10 @@
         android:paddingLeft="35dp"
         android:textSize="20dp"/>
     <Spinner
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_width="360dp"
+        android:layout_height="35dp"
         android:layout_gravity="center_horizontal"
-        android:textSize="25dp"
+        android:textSize="30dp"
         android:id="@+id/postos_spinner" />
 
     <TextView
@@ -37,10 +37,10 @@
         android:paddingLeft="35dp"
         android:textSize="20dp"/>
     <Spinner
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_width="360dp"
+        android:layout_height="35dp"
         android:layout_gravity="center_horizontal"
-        android:textSize="25dp"
+        android:textSize="30dp"
         android:id="@+id/tipo_combust_spinner"/>
 
     <TextView

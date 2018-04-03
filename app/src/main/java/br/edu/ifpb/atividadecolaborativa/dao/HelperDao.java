@@ -35,8 +35,10 @@ public class HelperDao extends SQLiteOpenHelper {
                 "valor_pago REAL NOT NULL, " +
                 "quilometragem REAL NOT NULL, " +
                 "horario TEXT NOT NULL, " +
-                "FOREIGN KEY (id_usuario) REFERENCES Usuario (id) ON DELETE RESTRICT ON UPDATE CASCADE, " +
-                "FOREIGN KEY (id_posto) REFERENCES Posto (id) ON DELETE RESTRICT ON UPDATE CASCADE";
+                "id_usuario INTEGER NOT NULL, " +
+                "id_posto INTEGER NOT NULL, " +
+                "FOREIGN KEY (id_usuario) REFERENCES Usuario (id), " +
+                "FOREIGN KEY (id_posto) REFERENCES Posto (id))";
         db.execSQL(sql3);
     }
 

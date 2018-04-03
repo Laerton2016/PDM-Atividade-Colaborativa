@@ -51,7 +51,10 @@ public class PostoDeCombustivelDAO {
         SQLiteDatabase db = helperDao.getReadableDatabase();
         String[] params = {id.toString()};
         Cursor cursor = db.rawQuery(sql, params);
-        PostoDeCombustivel postoDeCombustivel = dadosDoPosto(cursor);
+        PostoDeCombustivel postoDeCombustivel = null;
+        if(cursor.moveToFirst()){
+            postoDeCombustivel = dadosDoPosto(cursor);
+        }
         return postoDeCombustivel;
     }
 

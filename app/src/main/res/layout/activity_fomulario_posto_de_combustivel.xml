@@ -17,8 +17,10 @@
         android:layout_gravity="center_horizontal"/>
 
     <EditText
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:hint="Nome"
@@ -26,16 +28,20 @@
         android:id="@+id/form_posto_nome" />
 
     <EditText
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:layout_gravity="center_horizontal"
         android:hint="UF"
         android:textSize="25dp"
         android:id="@+id/form_posto_uf" />
 
     <EditText
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:layout_gravity="center_horizontal"
         android:hint="Cidade"
         android:textSize="25dp"

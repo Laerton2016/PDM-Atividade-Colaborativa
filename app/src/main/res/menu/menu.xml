@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_historico_data" android:title="Histórico por Data"/>
+    <item android:id="@+id/menu_historico_posto" android:title="Histórico por Posto"/>
+    <item android:id="@+id/menu_novo_posto" android:title="Novo Posto"/>
+    <item android:id="@+id/menu_novo_abastecimento" android:title="Novo Abastecimento"/>
+    <item android:id="@+id/menu_sair" android:title="Sair"/>
+
+</menu>

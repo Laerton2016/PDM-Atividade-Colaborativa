@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putLong("user", usuario.getId());
                     editor.commit();
-                    Intent intent = new Intent(MainActivity.this, FormularioAbastecimentoActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ListaAbastecimentoPorDataActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Email ou senha inválidos!", Toast.LENGTH_LONG).show();

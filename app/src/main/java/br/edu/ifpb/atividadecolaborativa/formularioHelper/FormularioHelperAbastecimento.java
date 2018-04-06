@@ -41,16 +41,14 @@ public class FormularioHelperAbastecimento {
         this.abastecimento = new Abastecimento();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public Abastecimento pegaAbastecimento(Context context) {
-        abastecimento.setHorario(LocalDateTime.now());
         abastecimento.setUsuario(usuario);
         abastecimento.setQuilometragem(Double.valueOf(campoQuilometragem.getText().toString()));
         abastecimento.setValorLitro(Double.valueOf(campoValorLitro.getText().toString()));
         abastecimento.setQtdeLitros(Double.valueOf(campoQtdeLitros.getText().toString()));
-        abastecimento.setTipoDeCombustivel(TipoDeCombustivel.valueOf(campoPostoDeCombustivel.getSelectedItem().toString()));
-        PostoDeCombustivelDAO dao = new PostoDeCombustivelDAO(context);
-        PostoDeCombustivel postoDeCombustivel = dao.buscarPosto(campoPostoDeCombustivel.getSelectedItemId());
+        TipoDeCombustivel tipo = (TipoDeCombustivel) campoTipoDeCombustivel.getSelectedItem();
+        abastecimento.setTipoDeCombustivel(tipo);
+        PostoDeCombustivel postoDeCombustivel = (PostoDeCombustivel) campoPostoDeCombustivel.getSelectedItem();
         abastecimento.setPostoDeCombustivel(postoDeCombustivel);
         return abastecimento;
     }

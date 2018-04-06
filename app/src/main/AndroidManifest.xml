@@ -20,16 +20,17 @@
         </activity>
         <activity
             android:name=".FormularioUsuarioActivity"
-            android:label="Criar Conta">
-
-        </activity>
+            android:label="Criar Conta" />
         <activity
             android:name=".FormularioPostoDeCombustivelActivity"
-            android:label="Novo Posto">
+            android:label="Novo Posto" />
+        <activity
+            android:name=".FormularioAbastecimentoActivity"
+            android:label="Abastecimento" />
+        <activity android:name=".ListaAbastecimentoPorDataActivity" android:label="Abastecimentos por Data">
 
         </activity>
-        <activity android:name=".FormularioAbastecimentoActivity"
-            android:label="Abastecimento">
+        <activity android:name=".ListaAbastecimentoPorPostoActivity" android:label="Abastecimentos por Posto de Combustível">
 
         </activity>
     </application>

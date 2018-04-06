@@ -85,11 +85,6 @@ public class PostoDeCombustivel implements Serializable {
 
     @Override
     public String toString() {
-        return "PostoDeCombustivel{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", uf='" + uf + '\'' +
-                ", cidade='" + cidade + '\'' +
-                '}';
+        return nome + " - " + cidade + " - " + uf;
     }
 }

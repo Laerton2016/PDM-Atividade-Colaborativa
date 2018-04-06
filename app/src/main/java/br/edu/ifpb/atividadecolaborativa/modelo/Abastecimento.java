@@ -1,9 +1,11 @@
 package br.edu.ifpb.atividadecolaborativa.modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 
 /**
  * Created by Edilva on 27/03/2018.
@@ -19,13 +21,13 @@ public class Abastecimento implements Serializable {
     private double valorLitro;
     private double valorPago;
     private double quilometragem;
-    private LocalDateTime horario;
+    private Date horario;
 
     public Abastecimento() {
     }
 
     public Abastecimento(Usuario usuario, PostoDeCombustivel postoDeCombustivel, TipoDeCombustivel tipoDeCombustivel,
-                         double qtdeLitros, double valorLitro, double quilometragem, LocalDateTime horario) {
+                         double qtdeLitros, double valorLitro, double quilometragem, Date horario) {
         this.usuario = usuario;
         this.postoDeCombustivel = postoDeCombustivel;
         this.tipoDeCombustivel = tipoDeCombustivel;
@@ -36,7 +38,7 @@ public class Abastecimento implements Serializable {
     }
 
     public Abastecimento(Long id, Usuario usuario, PostoDeCombustivel postoDeCombustivel, TipoDeCombustivel tipoDeCombustivel,
-                         double qtdeLitros, double valorLitro, double valorPago, double quilometragem,  LocalDateTime horario) {
+                         double qtdeLitros, double valorLitro, double valorPago, double quilometragem,  Date horario) {
         this.id = id;
         this.usuario = usuario;
         this.postoDeCombustivel = postoDeCombustivel;
@@ -112,11 +114,11 @@ public class Abastecimento implements Serializable {
         this.quilometragem = quilometragem;
     }
 
-    public LocalDateTime getHorario() {
+    public Date getHorario() {
         return horario;
     }
 
-    public void setHorario(LocalDateTime horario) {
+    public void setHorario(Date horario) {
         this.horario = horario;
     }
 
@@ -161,16 +163,8 @@ public class Abastecimento implements Serializable {
 
     @Override
     public String toString() {
-        return "Abastecimento{" +
-                "id=" + id +
-                ", usuario=" + usuario +
-                ", postoDeCombustivel=" + postoDeCombustivel +
-                ", tipoDeCombustivel=" + tipoDeCombustivel +
-                ", qtdeLitros=" + qtdeLitros +
-                ", valorLitro=" + valorLitro +
-                ", valorPago=" + valorPago +
-                ", quilometragem=" + quilometragem +
-                ", horario=" + horario +
-                '}';
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String s = dateFormat.format(horario);
+        return s + " - " + postoDeCombustivel.getNome();
     }
 }

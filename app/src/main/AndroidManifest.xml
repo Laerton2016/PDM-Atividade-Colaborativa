@@ -33,6 +33,7 @@
         <activity android:name=".ListaAbastecimentoPorPostoActivity" android:label="Abastecimentos por Posto de Combustível">
 
         </activity>
-    </application>
 
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

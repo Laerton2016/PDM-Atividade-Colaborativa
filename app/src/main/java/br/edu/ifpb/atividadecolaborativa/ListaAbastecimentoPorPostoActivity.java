@@ -53,6 +53,16 @@ public class ListaAbastecimentoPorPostoActivity extends AppCompatActivity {
                 listaAbastecimentos = (ListView) findViewById(R.id.lista_abastecimento_posto);
                 posto = (PostoDeCombustivel) spinnerPostoCombustivel.getSelectedItem();
                 carregaLista();
+
+                listaAbastecimentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+                        Abastecimento abastecimento = (Abastecimento) listaAbastecimentos.getItemAtPosition(position);
+                        Intent intentVaiPraDescricao = new Intent(ListaAbastecimentoPorPostoActivity.this, DescricaoAbastecimentoActivity.class);
+                        intentVaiPraDescricao.putExtra("abastecimento", abastecimento);
+                        startActivity(intentVaiPraDescricao);
+                    }
+                });
             }
         });
 
@@ -119,6 +129,8 @@ public class ListaAbastecimentoPorPostoActivity extends AppCompatActivity {
                 startActivity(intentNovoAbastecimento);
                 break;
             case R.id.menu_sair:
+                Sair sair = new Sair(this);
+                sair.sair();
                 break;
         }
 

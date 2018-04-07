@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="br.edu.ifpb.atividadecolaborativa.DescricaoAbastecimentoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abastecimento"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/postoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="25dp"
+        android:paddingLeft="35dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/combustivelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="25dp"
+        android:paddingLeft="35dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/qtdeLitrosText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="25dp"
+        android:paddingLeft="35dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/valorLitroText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="25dp"
+        android:paddingLeft="35dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/valorPagoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="25dp"
+        android:paddingLeft="35dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/quilometragemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="25dp"
+        android:paddingLeft="35dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/horarioText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="25dp"
+        android:paddingLeft="35dp"
+        android:textSize="20dp"/>
+</LinearLayout>

@@ -27,11 +27,15 @@
         <activity
             android:name=".FormularioAbastecimentoActivity"
             android:label="Abastecimento" />
-        <activity android:name=".ListaAbastecimentoPorDataActivity" android:label="Abastecimentos por Data">
-
-        </activity>
-        <activity android:name=".ListaAbastecimentoPorPostoActivity" android:label="Abastecimentos por Posto de Combustível">
-
+        <activity
+            android:name=".ListaAbastecimentoPorDataActivity"
+            android:label="Abastecimentos por Data"></activity>
+        <activity
+            android:name=".ListaAbastecimentoPorPostoActivity"
+            android:label="Abastecimentos por Posto de Combustível"></activity>
+        <activity
+            android:name=".DescricaoAbastecimentoActivity"
+            android:label="Descrição">
         </activity>
     </application>
 

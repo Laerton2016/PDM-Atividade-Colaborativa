@@ -89,9 +89,6 @@ public class AbastecimentoDAO {
         Abastecimento abastecimento = new Abastecimento();
         abastecimento.setId(cursor.getLong(cursor.getColumnIndex("id")));
         String tipoDeCombustivel = cursor.getString(cursor.getColumnIndex("tipo_combustivel"));
-        System.out.println(tipoDeCombustivel);
-        String t = TipoDeCombustivel.valueOf(tipoDeCombustivel).toString();
-        System.out.println("resut: " + t);
         abastecimento.setTipoDeCombustivel(TipoDeCombustivel.valueOf(tipoDeCombustivel));
         abastecimento.setQtdeLitros(cursor.getDouble(cursor.getColumnIndex("qtde_litros")));
         abastecimento.setValorLitro(cursor.getDouble(cursor.getColumnIndex("valor_litro")));

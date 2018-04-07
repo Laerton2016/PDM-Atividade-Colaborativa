@@ -102,6 +102,8 @@ public class FormularioAbastecimentoActivity extends AppCompatActivity {
                 startActivity(intentNovoPosto);
                 break;
             case R.id.menu_sair:
+                Sair sair = new Sair(this);
+                sair.sair();
                 break;
         }
 

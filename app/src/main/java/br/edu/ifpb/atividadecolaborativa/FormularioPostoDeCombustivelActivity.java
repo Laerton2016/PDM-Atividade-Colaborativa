@@ -63,6 +63,8 @@ public class FormularioPostoDeCombustivelActivity extends AppCompatActivity {
                 startActivity(intentNovoAbastecimento);
                 break;
             case R.id.menu_sair:
+                Sair sair = new Sair(this);
+                sair.sair();
                 break;
         }
 

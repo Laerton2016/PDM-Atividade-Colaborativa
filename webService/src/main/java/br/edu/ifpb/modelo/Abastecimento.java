@@ -2,6 +2,7 @@ package br.edu.ifpb.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 //import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 //import javax.persistence.ManyToOne;
 
 
@@ -33,12 +36,13 @@ public class Abastecimento implements Serializable {
     private double valorLitro;
     private double valorPago;
     private double quilometragem;
-    private LocalDateTime horario;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date horario;
 
     public Abastecimento() {
     }
 
-    public Abastecimento( int usuarioID, long postoDeCombustivelID, TipoDeCombustivel tipoDeCombustivel, double qtdeLitros, double valorLitro, double valorPago, LocalDateTime horario) {
+    public Abastecimento( int usuarioID, long postoDeCombustivelID, TipoDeCombustivel tipoDeCombustivel, double qtdeLitros, double valorLitro, double valorPago, Date horario) {
         this.usuarioID = usuarioID;
         this.postoDeCombustivelID = postoDeCombustivelID;
         this.tipoDeCombustivel = tipoDeCombustivel;
@@ -114,26 +118,26 @@ public class Abastecimento implements Serializable {
         this.quilometragem = quilometragem;
     }
 
-    public LocalDateTime getHorario() {
+    public Date getHorario() {
         return horario;
     }
 
-    public void setHorario(LocalDateTime horario) {
+    public void setHorario(Date horario) {
         this.horario = horario;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 79 * hash + (int) (this.usuarioID ^ (this.usuarioID >>> 32));
-        hash = 79 * hash + (int) (this.postoDeCombustivelID ^ (this.postoDeCombustivelID >>> 32));
-        hash = 79 * hash + (this.tipoDeCombustivel != null ? this.tipoDeCombustivel.hashCode() : 0);
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.qtdeLitros) ^ (Double.doubleToLongBits(this.qtdeLitros) >>> 32));
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.valorLitro) ^ (Double.doubleToLongBits(this.valorLitro) >>> 32));
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.valorPago) ^ (Double.doubleToLongBits(this.valorPago) >>> 32));
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.quilometragem) ^ (Double.doubleToLongBits(this.quilometragem) >>> 32));
-        hash = 79 * hash + (this.horario != null ? this.horario.hashCode() : 0);
+        hash = 83 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 83 * hash + (int) (this.usuarioID ^ (this.usuarioID >>> 32));
+        hash = 83 * hash + (int) (this.postoDeCombustivelID ^ (this.postoDeCombustivelID >>> 32));
+        hash = 83 * hash + (this.tipoDeCombustivel != null ? this.tipoDeCombustivel.hashCode() : 0);
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.qtdeLitros) ^ (Double.doubleToLongBits(this.qtdeLitros) >>> 32));
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.valorLitro) ^ (Double.doubleToLongBits(this.valorLitro) >>> 32));
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.valorPago) ^ (Double.doubleToLongBits(this.valorPago) >>> 32));
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.quilometragem) ^ (Double.doubleToLongBits(this.quilometragem) >>> 32));
+        hash = 83 * hash + (this.horario != null ? this.horario.hashCode() : 0);
         return hash;
     }
 
@@ -180,9 +184,6 @@ public class Abastecimento implements Serializable {
     }
 
     
-
-    
-
     @Override
     public String toString() {
         return "Abastecimento{" +

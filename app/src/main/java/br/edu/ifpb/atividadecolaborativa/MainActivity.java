@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
     private FormularioHelperLogin helperLogin;
     public static final String PREFS_NAME = "MyPrefsFile";
-    private HttpURLConnection conection ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.conection = getConnection();
+
         helperLogin = new FormularioHelperLogin(this);
 
         Button buttonLogin = (Button) findViewById(R.id.login_botao_entrar);
@@ -59,21 +59,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-    }
-    private HttpURLConnection getConnection(){
-        HttpURLConnection connection = null;
-        try {
-            URL endereco = new URL("http://localhost:8080/webService/");
-            try{
-                connection = (HttpURLConnection) endereco.openConnection();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return connection;
 
     }
 }

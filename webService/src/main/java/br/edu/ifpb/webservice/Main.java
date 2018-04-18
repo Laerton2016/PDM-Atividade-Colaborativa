@@ -27,7 +27,7 @@ import javax.persistence.EntityManager;
 public class Main {
 
     public static void main(String[] args) {
-        //EntityManager em = JPAUtil.getEntityManager();
+        /*//EntityManager em = JPAUtil.getEntityManager();
         //Usuario user = new Usuario("Laerton Marques de Figueiredo", "laerton240311@gmail.com", "5555");
         //PostoDeCombustivel posto = new PostoDeCombustivel("Queirogão", "PB", "Sousa");
         Abastecimento ab = new Abastecimento(2, 1, TipoDeCombustivel.ETANOL_COMUM, 5, 3.99, 56, new Date());
@@ -36,7 +36,7 @@ public class Main {
         System.out.println(ab);
         //Abastecimento ab2 = dao.findAbastByTipoByPosto(TipoDeCombustivel.ETANOL_COMUM, 1);
         //Collection<Abastecimento> lista = dao.findByUser(2);
-        //System.out.println(lista.size());
+        //System.out.println(lista.size());*/
     }
     
 }

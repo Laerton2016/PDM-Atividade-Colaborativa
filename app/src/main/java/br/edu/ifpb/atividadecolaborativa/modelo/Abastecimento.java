@@ -23,6 +23,7 @@ public class Abastecimento implements Serializable {
     private double quilometragem;
     private Date horario;
 
+
     public Abastecimento() {
     }
 

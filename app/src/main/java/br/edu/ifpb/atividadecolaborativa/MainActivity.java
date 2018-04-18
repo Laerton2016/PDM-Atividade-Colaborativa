@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        GetJson gj = new GetJson();
-        gj.execute();
+      //  GetJson gj = new GetJson();
+       // gj.execute();
         //String resultado = NetworkUtils.GetJASONFromApi("http://10.3.132.140:8080/webService/webapi/Abastecimentos/ultimo/1/ETANOL_COMUM");
 
 
-    }
+    }/*
     private class GetJson extends AsyncTask<Void, Void, String>{
 
         @Override
@@ -86,5 +86,5 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Resultado", texto);
             load.dismiss();
         }
-    }
+    }*/
 }

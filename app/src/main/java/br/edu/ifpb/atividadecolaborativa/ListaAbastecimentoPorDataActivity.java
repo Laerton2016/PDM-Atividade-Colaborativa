@@ -1,10 +1,13 @@
 package br.edu.ifpb.atividadecolaborativa;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,10 +17,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import br.edu.ifpb.atividadecolaborativa.dao.AbastecimentoDAO;
@@ -26,12 +37,14 @@ import br.edu.ifpb.atividadecolaborativa.modelo.Abastecimento;
 import br.edu.ifpb.atividadecolaborativa.modelo.PostoDeCombustivel;
 import br.edu.ifpb.atividadecolaborativa.modelo.TipoDeCombustivel;
 import br.edu.ifpb.atividadecolaborativa.modelo.Usuario;
+import br.edu.ifpb.atividadecolaborativa.rest.DateDeserializer;
+import br.edu.ifpb.atividadecolaborativa.rest.NetworkUtils;
 
 public class ListaAbastecimentoPorDataActivity extends AppCompatActivity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
     private ListView listaAbastecimentos;
-
+    private ProgressDialog load;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,24 +73,27 @@ public class ListaAbastecimentoPorDataActivity extends AppCompatActivity {
     }
 
     private void carregaLista() {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        /*SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         Long id = settings.getLong("user", 0);
 
-        UsuarioDAO daoUsuario = new UsuarioDAO(ListaAbastecimentoPorDataActivity.this);
-        Usuario usuario = daoUsuario.buscarUsuario(id);
-        daoUsuario.close();
+        //UsuarioDAO daoUsuario = new UsuarioDAO(ListaAbastecimentoPorDataActivity.this);
+        //Usuario usuario = daoUsuario.buscarUsuario(id);
+        //daoUsuario.close();
 
-        AbastecimentoDAO dao = new AbastecimentoDAO(this);
+        //AbastecimentoDAO dao = new AbastecimentoDAO(this);
         List<Abastecimento> abastecimentos  = null;
+        Gson gson =new Gson();
         try {
-            abastecimentos = dao.abastecimentosDoUsuario(usuario);
-        } catch (ParseException e) {
+            //abastecimentos =  dao.abastecimentosDoUsuario(usuario);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        dao.close();
+        //dao.close();
 
         listaAbastecimentos.setAdapter(new ArrayAdapter<Abastecimento>(this,
-                android.R.layout.simple_list_item_1, abastecimentos));
+                android.R.layout.simple_list_item_1, abastecimentos));*/
+        GetJson gj = new GetJson();
+        gj.execute();
     }
 
     @Override
@@ -118,4 +134,40 @@ public class ListaAbastecimentoPorDataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class GetJson extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute(){
+            load = ProgressDialog.show(ListaAbastecimentoPorDataActivity.this, "Por favor Aguarde ...", "Recuperando Informações do Servidor...");
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            Long id = settings.getLong("user", 0);
+            Log.i ("Id", String.valueOf(id));
+            return NetworkUtils.GetJASONFromApi("http://10.3.132.157:8080/webService/webapi/Abastecimentos/byUser/" + id);
+
+
+        }
+        @Override
+        protected void onPostExecute(String abastecimentos){
+
+
+
+            Type collectionType = new TypeToken<List<Abastecimento>>() {}.getType();
+            //Gson gs = new Gson();
+            List<Abastecimento> abs = new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).create().fromJson(abastecimentos, collectionType);
+
+            if (abs != null){
+                listaAbastecimentos.setAdapter(new ArrayAdapter<Abastecimento>(ListaAbastecimentoPorDataActivity.this,
+                        android.R.layout.simple_list_item_1, abs));
+            }
+
+            Log.i("Resultado", abastecimentos);
+            load.dismiss();
+        }
+    }
 }
+

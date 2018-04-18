@@ -9,6 +9,8 @@ import br.edu.ifpb.persitencia.AbastecimentoDAO;
 import br.edu.ifpb.persitencia.JPAUtil;
 import br.edu.ifpb.persitencia.UsuarioDAO;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 /*
@@ -24,15 +26,16 @@ import javax.persistence.EntityManager;
 public class Main {
 
     public static void main(String[] args) {
-        //EntityManager em = JPAUtil.getEntityManager();
-        Usuario user = new Usuario("Laerton Marques de Figueiredo", "laerton240311@gmail.com", "5555");
-        PostoDeCombustivel posto = new PostoDeCombustivel("Queirogão", "PB", "Sousa");
-        Abastecimento ab = new Abastecimento(user, posto, TipoDeCombustivel.ETANOL_COMUM, 5, 3.99, 56, LocalDateTime.now());
+       /* //EntityManager em = JPAUtil.getEntityManager();
+        //Usuario user = new Usuario("Laerton Marques de Figueiredo", "laerton240311@gmail.com", "5555");
+        //PostoDeCombustivel posto = new PostoDeCombustivel("Queirogão", "PB", "Sousa");
+        Abastecimento ab = new Abastecimento(2, 1, TipoDeCombustivel.ETANOL_COMUM, 5, 3.99, 56, LocalDateTime.now());
         AbastecimentoDAO dao = new AbastecimentoDAO();
         ab = dao.save(ab);
         System.out.println(ab);
-        Abastecimento ab2 = dao.findAbastByTipoByPosto(TipoDeCombustivel.ETANOL_COMUM, posto);
-        System.out.println(ab2);
+        //Abastecimento ab2 = dao.findAbastByTipoByPosto(TipoDeCombustivel.ETANOL_COMUM, 1);
+        Collection<Abastecimento> lista = dao.findByUser(2);
+        System.out.println(lista.size());*/
     }
     
 }

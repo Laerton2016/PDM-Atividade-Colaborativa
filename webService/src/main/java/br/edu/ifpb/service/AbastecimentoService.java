@@ -9,6 +9,7 @@ import br.edu.ifpb.modelo.Abastecimento;
 import br.edu.ifpb.modelo.PostoDeCombustivel;
 import br.edu.ifpb.modelo.TipoDeCombustivel;
 import br.edu.ifpb.persitencia.AbastecimentoDAO;
+import java.util.Collection;
 
 /**
  *
@@ -19,8 +20,8 @@ public class AbastecimentoService {
     public Abastecimento findAbastecimento(long id){
         return dao.getById(Abastecimento.class, id);
     }
-    public Abastecimento findValorCombustivel (TipoDeCombustivel tipo, PostoDeCombustivel posto){
-        return dao.findAbastByTipoByPosto(tipo, posto);
+    public Abastecimento findValorCombustivel (TipoDeCombustivel tipo, long postoId){
+        return dao.findAbastByTipoByPosto(tipo, postoId);
     }
     public void deletar (Abastecimento abastecimento){
         dao.delete(abastecimento);
@@ -30,5 +31,13 @@ public class AbastecimentoService {
             return dao.save(abastecimento);
         }
         return dao.update(abastecimento);
+    }
+    
+    public Collection<Abastecimento> findByUser(long idUser){
+        return dao.findByUser(idUser);
+    }
+    
+    public Collection<Abastecimento> findByPostoAndUser(long idUser,long idPosto){
+        return dao.findByPostoAndUser(idPosto, idUser);
     }
 }

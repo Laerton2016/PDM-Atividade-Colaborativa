@@ -10,6 +10,7 @@ import br.edu.ifpb.modelo.PostoDeCombustivel;
 import br.edu.ifpb.modelo.TipoDeCombustivel;
 import br.edu.ifpb.modelo.exception.DAOException;
 import br.edu.ifpb.modelo.exception.ErrorCode;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -33,14 +34,31 @@ public class AbastecimentoDAO extends AbstractDAO<Abastecimento>
      * @param posto - Posto de combustível
      * @return Abastecimento
      */
-    public Abastecimento findAbastByTipoByPosto(TipoDeCombustivel tipo, PostoDeCombustivel posto){
+    public Abastecimento findAbastByTipoByPosto(TipoDeCombustivel tipo, long idPosto){
         EntityManager em = JPAUtil.getEntityManager();
         Abastecimento ab = null;
         TypedQuery<Abastecimento> query = em.createQuery("from "
                 + "Abastecimento a where a.tipoDeCombustivel = :tipo" +
-                " and a.postoDeCombustivel.id = :posto order by a.horario", Abastecimento.class);
-        return query.setParameter("tipo", tipo).setParameter("posto", posto.getId()).getResultList().get(0);
+                " and a.postoDeCombustivelID = :posto order by a.horario", Abastecimento.class);
+        return query.setParameter("tipo", tipo).setParameter("posto", idPosto).getResultList().get(0);
+    }
+   
+    public Collection<Abastecimento> findByPostoAndUser(long idPosto, long idUser){
+        EntityManager em = JPAUtil.getEntityManager();
+        Abastecimento ab = null;
+        TypedQuery<Abastecimento> query = em.createQuery("from "
+                + "Abastecimento a where a.usuarioID = :userID" +
+                " and a.postoDeCombustivelID = :posto order by a.horario", Abastecimento.class);
+        return query.setParameter("userID", idUser).setParameter("posto", idPosto).getResultList();
     }
     
+    public Collection<Abastecimento> findByUser(long idUser){
+        EntityManager em = JPAUtil.getEntityManager();
+        Abastecimento ab = null;
+        TypedQuery<Abastecimento> query = em.createQuery("from "
+                + "Abastecimento a where a.usuarioID = :userID" +
+                " order by a.horario", Abastecimento.class);
+        return query.setParameter("userID", idUser).getResultList();
+    }
     
 }

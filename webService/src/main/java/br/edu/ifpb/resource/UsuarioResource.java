@@ -8,6 +8,7 @@ package br.edu.ifpb.resource;
 
 import br.edu.ifpb.service.UsuarioService;
 import br.edu.ifpb.modelo.Usuario;
+import com.google.gson.Gson;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -36,9 +37,12 @@ public class UsuarioResource {
     }
     
     @POST
-    public Response save(Usuario user){
-        user = service.salvar(user);
-        return Response.status(Status.CREATED).entity(user).build();
+    @Produces("application/json")
+    public long save(String user){
+        Gson gson = new Gson();
+        Usuario u = gson.fromJson(user, Usuario.class);
+        u = service.salvar(u);
+        return u.getId(); //Response.status(Status.CREATED).entity(user).build();
     }
     
     @DELETE

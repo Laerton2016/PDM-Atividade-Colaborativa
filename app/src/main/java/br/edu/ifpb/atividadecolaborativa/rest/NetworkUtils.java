@@ -40,6 +40,7 @@ public class NetworkUtils {
             conexao.disconnect();
 
         }catch (Exception e){
+
             e.printStackTrace();
         }
 

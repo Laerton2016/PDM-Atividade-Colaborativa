@@ -7,20 +7,22 @@ package br.edu.ifpb.resource;
 import br.edu.ifpb.service.AbastecimentoService;
 import br.edu.ifpb.service.PostoService;
 import br.edu.ifpb.modelo.Abastecimento;
-import br.edu.ifpb.modelo.PostoDeCombustivel;
+
 import br.edu.ifpb.modelo.TipoDeCombustivel;
+
+import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+
+
 
 /**
  *
@@ -38,9 +40,21 @@ public class AbasteciemntoResource {
     @Path("ultimo/{postoId}/{tipo}")
     //@Produces({MediaType.APPLICATION_XML,       MediaType.APPLICATION_JSON})
     public Abastecimento findUltimoAbastCombustivel( @PathParam("postoId")long postoId, @PathParam("tipo") String tipo){
-        PostoDeCombustivel posto = servicePosto.findPosto(postoId);
+        //PostoDeCombustivel posto = servicePosto.findPosto(postoId);
         
-        return service.findValorCombustivel(TipoDeCombustivel.valueOf(tipo), posto);
+        return service.findValorCombustivel(TipoDeCombustivel.valueOf(tipo), postoId);
+    }
+    
+    @GET
+    @Path("postoAndUser/{postoId}/{userId}")
+    public Collection<Abastecimento> findByPostoAndUser(@PathParam("postoId") long postoId, @PathParam("userId") long userId){
+        return service.findByPostoAndUser(userId, postoId);
+    }
+    
+    @GET
+    @Path("byUser/{userId}")
+    public Collection<Abastecimento> findByUser(@PathParam("userId") long userId){
+        return service.findByUser(userId);
     }
     
     @GET
@@ -50,9 +64,10 @@ public class AbasteciemntoResource {
     }
     
     @POST
-    public Response salvar(Abastecimento abastecimento){
+    //@Path("{abastecimento}")
+    public Abastecimento salvar(Abastecimento abastecimento){
         abastecimento = service.salvar(abastecimento);
-        return Response.status(Status.CREATED).entity(abastecimento).build();
+        return abastecimento; //Response.status(Status.CREATED).entity(abastecimento).build();
     }
     
     @DELETE

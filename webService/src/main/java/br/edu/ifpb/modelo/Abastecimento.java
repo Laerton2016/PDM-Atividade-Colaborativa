@@ -2,14 +2,14 @@ package br.edu.ifpb.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+//import javax.persistence.ManyToOne;
 
 
 
@@ -22,11 +22,11 @@ public class Abastecimento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Usuario usuario;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private PostoDeCombustivel postoDeCombustivel;
+    private long id;
+    //@ManyToOne(cascade = CascadeType.ALL)
+    private long usuarioID;
+    //@ManyToOne(cascade = CascadeType.ALL)
+    private long postoDeCombustivelID;
     @Enumerated(EnumType.STRING)
     private TipoDeCombustivel tipoDeCombustivel;
     private double qtdeLitros;
@@ -38,29 +38,17 @@ public class Abastecimento implements Serializable {
     public Abastecimento() {
     }
 
-    public Abastecimento(Usuario usuario, PostoDeCombustivel postoDeCombustivel, TipoDeCombustivel tipoDeCombustivel,
-                         double qtdeLitros, double valorLitro, double quilometragem, LocalDateTime horario) {
-        this.usuario = usuario;
-        this.postoDeCombustivel = postoDeCombustivel;
-        this.tipoDeCombustivel = tipoDeCombustivel;
-        this.qtdeLitros = qtdeLitros;
-        this.valorLitro = valorLitro;
-        this.quilometragem = quilometragem;
-        this.horario = horario;
-    }
-
-    public Abastecimento(Long id, Usuario usuario, PostoDeCombustivel postoDeCombustivel, TipoDeCombustivel tipoDeCombustivel,
-                         double qtdeLitros, double valorLitro, double valorPago, double quilometragem,  LocalDateTime horario) {
-        this.id = id;
-        this.usuario = usuario;
-        this.postoDeCombustivel = postoDeCombustivel;
+    public Abastecimento( int usuarioID, long postoDeCombustivelID, TipoDeCombustivel tipoDeCombustivel, double qtdeLitros, double valorLitro, double valorPago, LocalDateTime horario) {
+        this.usuarioID = usuarioID;
+        this.postoDeCombustivelID = postoDeCombustivelID;
         this.tipoDeCombustivel = tipoDeCombustivel;
         this.qtdeLitros = qtdeLitros;
         this.valorLitro = valorLitro;
         this.valorPago = valorPago;
-        this.quilometragem = quilometragem;
         this.horario = horario;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -70,20 +58,20 @@ public class Abastecimento implements Serializable {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public long getUsuarioID() {
+        return usuarioID;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(long id) {
+        this.usuarioID = id;
     }
 
-    public PostoDeCombustivel getPostoDeCombustivel() {
-        return postoDeCombustivel;
+    public long getPostoDeCombustivel() {
+        return postoDeCombustivelID;
     }
 
-    public void setPostoDeCombustivel(PostoDeCombustivel postoDeCombustivel) {
-        this.postoDeCombustivel = postoDeCombustivel;
+    public void setPostoDeCombustivel(long id) {
+        this.postoDeCombustivelID = id;
     }
 
     public TipoDeCombustivel getTipoDeCombustivel() {
@@ -135,50 +123,72 @@ public class Abastecimento implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Abastecimento that = (Abastecimento) o;
-
-        if (Double.compare(that.qtdeLitros, qtdeLitros) != 0) return false;
-        if (Double.compare(that.valorLitro, valorLitro) != 0) return false;
-        if (Double.compare(that.valorPago, valorPago) != 0) return false;
-        if (Double.compare(that.quilometragem, quilometragem) != 0) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (usuario != null ? !usuario.equals(that.usuario) : that.usuario != null) return false;
-        if (postoDeCombustivel != null ? !postoDeCombustivel.equals(that.postoDeCombustivel) : that.postoDeCombustivel != null)
-            return false;
-        if (tipoDeCombustivel != that.tipoDeCombustivel) return false;
-        return horario != null ? horario.equals(that.horario) : that.horario == null;
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 79 * hash + (int) (this.usuarioID ^ (this.usuarioID >>> 32));
+        hash = 79 * hash + (int) (this.postoDeCombustivelID ^ (this.postoDeCombustivelID >>> 32));
+        hash = 79 * hash + (this.tipoDeCombustivel != null ? this.tipoDeCombustivel.hashCode() : 0);
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.qtdeLitros) ^ (Double.doubleToLongBits(this.qtdeLitros) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.valorLitro) ^ (Double.doubleToLongBits(this.valorLitro) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.valorPago) ^ (Double.doubleToLongBits(this.valorPago) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.quilometragem) ^ (Double.doubleToLongBits(this.quilometragem) >>> 32));
+        hash = 79 * hash + (this.horario != null ? this.horario.hashCode() : 0);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (usuario != null ? usuario.hashCode() : 0);
-        result = 31 * result + (postoDeCombustivel != null ? postoDeCombustivel.hashCode() : 0);
-        result = 31 * result + (tipoDeCombustivel != null ? tipoDeCombustivel.hashCode() : 0);
-        temp = Double.doubleToLongBits(qtdeLitros);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(valorLitro);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(valorPago);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(quilometragem);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (horario != null ? horario.hashCode() : 0);
-        return result;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Abastecimento other = (Abastecimento) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.usuarioID != other.usuarioID) {
+            return false;
+        }
+        if (this.postoDeCombustivelID != other.postoDeCombustivelID) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.qtdeLitros) != Double.doubleToLongBits(other.qtdeLitros)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.valorLitro) != Double.doubleToLongBits(other.valorLitro)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.valorPago) != Double.doubleToLongBits(other.valorPago)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.quilometragem) != Double.doubleToLongBits(other.quilometragem)) {
+            return false;
+        }
+        if (this.tipoDeCombustivel != other.tipoDeCombustivel) {
+            return false;
+        }
+        if (this.horario != other.horario && (this.horario == null || !this.horario.equals(other.horario))) {
+            return false;
+        }
+        return true;
     }
+
+    
+
+    
 
     @Override
     public String toString() {
         return "Abastecimento{" +
                 "id=" + id +
-                ", usuario=" + usuario +
-                ", postoDeCombustivel=" + postoDeCombustivel +
+                ", usuario=" + usuarioID +
+                ", postoDeCombustivel=" + postoDeCombustivelID +
                 ", tipoDeCombustivel=" + tipoDeCombustivel +
                 ", qtdeLitros=" + qtdeLitros +
                 ", valorLitro=" + valorLitro +

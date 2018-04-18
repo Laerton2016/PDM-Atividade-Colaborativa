@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -47,6 +48,15 @@ public class ListaAbastecimentoPorDataActivity extends AppCompatActivity {
             }
         });
 
+        listaAbastecimentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+                Abastecimento abastecimento = (Abastecimento) listaAbastecimentos.getItemAtPosition(position);
+                Intent intentVaiPraDescricao = new Intent(ListaAbastecimentoPorDataActivity.this, DescricaoAbastecimentoActivity.class);
+                intentVaiPraDescricao.putExtra("abastecimento", abastecimento);
+                startActivity(intentVaiPraDescricao);
+            }
+        });
     }
 
     private void carregaLista() {
@@ -100,6 +110,8 @@ public class ListaAbastecimentoPorDataActivity extends AppCompatActivity {
                 startActivity(intentNovoAbastecimento);
                 break;
             case R.id.menu_sair:
+                Sair sair = new Sair(this);
+                sair.sair();
                 break;
         }
 

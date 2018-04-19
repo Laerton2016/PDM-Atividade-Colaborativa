@@ -1,7 +1,8 @@
 package br.edu.ifpb.modelo;
 
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
+
 import java.util.Date;
 //import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Abastecimento implements Serializable {
     private double valorLitro;
     private double valorPago;
     private double quilometragem;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date horario;
 
     public Abastecimento() {
@@ -70,11 +71,11 @@ public class Abastecimento implements Serializable {
         this.usuarioID = id;
     }
 
-    public long getPostoDeCombustivel() {
+    public long getPostoDeCombustivelID() {
         return postoDeCombustivelID;
     }
 
-    public void setPostoDeCombustivel(long id) {
+    public void setPostoDeCombustivelID(long id) {
         this.postoDeCombustivelID = id;
     }
 

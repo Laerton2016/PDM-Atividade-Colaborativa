@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -18,7 +17,7 @@ import java.util.Locale;
 
 public class DateDeserializer implements JsonDeserializer<Date> {
     private static final String[] DATE_FORMATS = new String[]{
-            "MMM dd, yyyy HH:mm:ss",
+            "MMM-dd-yy HH:mm:ss",
             "MMM dd, yyyy",
             "dd/MM/yyyy",
             "mmm dd, yyyy",
@@ -30,12 +29,18 @@ public class DateDeserializer implements JsonDeserializer<Date> {
     public Date deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jdc) throws JsonParseException {
         for (String format : DATE_FORMATS) {
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", new Locale("pt", "BR"));
-                return sdf.parse(jsonElement.getAsString());
-            } catch (ParseException e) {
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yy HH:mm:ss", new Locale("pt", "BR"));
+                //Date dt = new Date();
+                Date dt = new Date();
+                dt.setTime(Long.parseLong(jsonElement.getAsString()));
+
+                return  dt; //sdf.parse(jsonElement.getAsString());
+            } catch (Exception e) {
+                throw new JsonParseException("Unparseable date: \"" + jsonElement.getAsString()
+                        + "\". Supported formats: " + Arrays.toString(DATE_FORMATS));
             }
         }
-        throw new JsonParseException("Unparseable date: \"" + jsonElement.getAsString()
-                + "\". Supported formats: " + Arrays.toString(DATE_FORMATS));
+        return  null;
+
     }
 }

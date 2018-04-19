@@ -21,9 +21,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -32,8 +35,10 @@ import java.util.Date;
 import java.util.List;
 
 import br.edu.ifpb.atividadecolaborativa.dao.AbastecimentoDAO;
+import br.edu.ifpb.atividadecolaborativa.dao.PostoDeCombustivelDAO;
 import br.edu.ifpb.atividadecolaborativa.dao.UsuarioDAO;
 import br.edu.ifpb.atividadecolaborativa.modelo.Abastecimento;
+import br.edu.ifpb.atividadecolaborativa.modelo.AbastecimentoLite;
 import br.edu.ifpb.atividadecolaborativa.modelo.PostoDeCombustivel;
 import br.edu.ifpb.atividadecolaborativa.modelo.TipoDeCombustivel;
 import br.edu.ifpb.atividadecolaborativa.modelo.Usuario;
@@ -147,22 +152,58 @@ public class ListaAbastecimentoPorDataActivity extends AppCompatActivity {
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             Long id = settings.getLong("user", 0);
             Log.i ("Id", String.valueOf(id));
-            return NetworkUtils.GetJASONFromApi("http://10.3.132.157:8080/webService/webapi/Abastecimentos/byUser/" + id);
+            return NetworkUtils.GetJASONFromApi("http://192.168.56.1:8080/webService/webapi/Abastecimentos/byUser/" + id);
 
 
         }
         @Override
         protected void onPostExecute(String abastecimentos){
 
+            //Tipando uma coleção para Json Converter
+            Type collectionType = new TypeToken<List<AbastecimentoLite>>() {}.getType();
+            //Convertendo o Json em uma lista de Abastecimento Lite
+            List<AbastecimentoLite> abs = new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).create().fromJson(abastecimentos, collectionType);
 
+            //Tratamento para lista nula ou vazia
+            if (abs != null  && abs.size() > 0){
+                //Daos nescesário para a busca
+                PostoDeCombustivelDAO dao = new PostoDeCombustivelDAO(ListaAbastecimentoPorDataActivity.this);
+                UsuarioDAO daoUser = new UsuarioDAO(ListaAbastecimentoPorDataActivity.this);
 
-            Type collectionType = new TypeToken<List<Abastecimento>>() {}.getType();
-            //Gson gs = new Gson();
-            List<Abastecimento> abs = new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).create().fromJson(abastecimentos, collectionType);
+                //Lista de resultado
+                List<Abastecimento> lista = new ArrayList<>();
+                //Formatando a data
+                SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-            if (abs != null){
+                for (AbastecimentoLite item:abs){
+
+                    //Busca usuário
+                    Usuario user = daoUser.buscarUsuario(item.getUsuarioID());
+                    Log.i("Usuario:", String.valueOf(item.getUsuarioID()));
+
+                    //Busca Posto
+                    PostoDeCombustivel posto = dao.buscarPosto(item.getPostoDeCombustivelID());
+                    Log.i("Posto:", String.valueOf(item.getPostoDeCombustivelID()));
+
+                    //Cria o Abastecimento com os dados do item repassado.
+                    Abastecimento ab = new Abastecimento();
+                    ab.setHorario(item.getHorario());
+                    ab.setId(item.getId());
+                    ab.setPostoDeCombustivel(posto);
+                    ab.setQtdeLitros(item.getQtdeLitros());
+                    ab.setQuilometragem(item.getQuilometragem());
+                    ab.setTipoDeCombustivel(item.getTipoDeCombustivel());
+                    ab.setUsuario(user);
+                    ab.setValorLitro(item.getValorLitro());
+                    ab.setValorPago(item.getValorPago());
+
+                    //Add lista
+                    lista.add(ab);
+
+                }
+                //Preenche os dados na tela.
                 listaAbastecimentos.setAdapter(new ArrayAdapter<Abastecimento>(ListaAbastecimentoPorDataActivity.this,
-                        android.R.layout.simple_list_item_1, abs));
+                        android.R.layout.simple_list_item_1, lista));
             }
 
             Log.i("Resultado", abastecimentos);

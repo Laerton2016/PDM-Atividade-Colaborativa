@@ -10,6 +10,7 @@ import br.edu.ifpb.modelo.Abastecimento;
 
 import br.edu.ifpb.modelo.TipoDeCombustivel;
 
+
 import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

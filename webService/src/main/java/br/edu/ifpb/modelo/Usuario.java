@@ -9,7 +9,7 @@ import javax.persistence.Id;
 /**
  * Created by Edilva on 26/03/2018.
  */
-@Entity
+//@Entity
 public class Usuario implements Serializable {
 
     @Id

@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * Created by Edilva on 26/03/2018.
  */
 
-@Entity
+//@Entity
 public class PostoDeCombustivel implements Serializable {
 
     @Id

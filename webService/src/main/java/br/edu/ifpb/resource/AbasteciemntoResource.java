@@ -9,6 +9,7 @@ import br.edu.ifpb.service.PostoService;
 import br.edu.ifpb.modelo.Abastecimento;
 
 import br.edu.ifpb.modelo.TipoDeCombustivel;
+import com.google.gson.Gson;
 
 
 import java.util.Collection;
@@ -66,9 +67,11 @@ public class AbasteciemntoResource {
     
     @POST
     //@Path("{abastecimento}")
-    public Abastecimento salvar(Abastecimento abastecimento){
-        abastecimento = service.salvar(abastecimento);
-        return abastecimento; //Response.status(Status.CREATED).entity(abastecimento).build();
+    public Abastecimento salvar(String abastecimento){
+        Gson g = new Gson();
+        Abastecimento a = g.fromJson(abastecimento, Abastecimento.class);
+        service.salvar(a);
+        return a; //Response.status(Status.CREATED).entity(abastecimento).build();
     }
     
     @DELETE

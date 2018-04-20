@@ -30,7 +30,7 @@ public class Main {
         /*//EntityManager em = JPAUtil.getEntityManager();
         //Usuario user = new Usuario("Laerton Marques de Figueiredo", "laerton240311@gmail.com", "5555");
         //PostoDeCombustivel posto = new PostoDeCombustivel("Queirogão", "PB", "Sousa");
-        Abastecimento ab = new Abastecimento(2, 1, TipoDeCombustivel.ETANOL_COMUM, 5, 3.99, 56, new Date());
+        Abastecimento ab = new Abastecimento(1, 1, TipoDeCombustivel.ETANOL_COMUM, 5, 3.99, 2000, new Date());
         AbastecimentoDAO dao = new AbastecimentoDAO();
         ab = dao.save(ab);
         System.out.println(ab);

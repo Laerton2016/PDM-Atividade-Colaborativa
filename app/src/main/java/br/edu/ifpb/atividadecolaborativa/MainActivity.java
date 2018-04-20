@@ -87,4 +87,12 @@ public class MainActivity extends AppCompatActivity {
             load.dismiss();
         }
     }*/
+
+    @Override
+    protected void onResume() {
+        if(getIntent().getBooleanExtra("SAIR", false)){
+            finish();
+        }
+        super.onResume();
+    }
 }

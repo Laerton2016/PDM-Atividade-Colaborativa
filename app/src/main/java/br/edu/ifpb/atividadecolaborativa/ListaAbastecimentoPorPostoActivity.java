@@ -166,7 +166,7 @@ public class ListaAbastecimentoPorPostoActivity extends AppCompatActivity {
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             Long id = settings.getLong("user", 0);
             Log.i("Id", String.valueOf(id));
-            return NetworkUtils.GetJASONFromApi("http://192.168.56.1:8080/webService/webapi/Abastecimentos/postoAndUser/" + posto.getId() + "/" + id);
+            return NetworkUtils.GetJASONFromApi("http://192.168.2.11:8080/webService/webapi/Abastecimentos/postoAndUser/" + posto.getId() + "/" + id);
 
 
         }

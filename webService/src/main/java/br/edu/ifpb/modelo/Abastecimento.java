@@ -35,7 +35,7 @@ public class Abastecimento implements Serializable {
     private TipoDeCombustivel tipoDeCombustivel;
     private double qtdeLitros;
     private double valorLitro;
-    private double valorPago;
+    //private double valorPago;
     private double quilometragem;
     @Temporal(TemporalType.DATE)
     private Date horario;
@@ -43,17 +43,25 @@ public class Abastecimento implements Serializable {
     public Abastecimento() {
     }
 
-    public Abastecimento( int usuarioID, long postoDeCombustivelID, TipoDeCombustivel tipoDeCombustivel, double qtdeLitros, double valorLitro, double valorPago, Date horario) {
+//    public Abastecimento( int usuarioID, long postoDeCombustivelID, TipoDeCombustivel tipoDeCombustivel, double qtdeLitros, double valorLitro, double valorPago, Date horario) {
+//        this.usuarioID = usuarioID;
+//        this.postoDeCombustivelID = postoDeCombustivelID;
+//        this.tipoDeCombustivel = tipoDeCombustivel;
+//        this.qtdeLitros = qtdeLitros;
+//        this.valorLitro = valorLitro;
+//        this.valorPago = valorPago;
+//        this.horario = horario;
+//    }
+
+    public Abastecimento(long usuarioID, long postoDeCombustivelID, TipoDeCombustivel tipoDeCombustivel, double qtdeLitros, double valorLitro, double quilometragem, Date horario) {
         this.usuarioID = usuarioID;
         this.postoDeCombustivelID = postoDeCombustivelID;
         this.tipoDeCombustivel = tipoDeCombustivel;
         this.qtdeLitros = qtdeLitros;
         this.valorLitro = valorLitro;
-        this.valorPago = valorPago;
+        this.quilometragem = quilometragem;
         this.horario = horario;
     }
-
-    
 
     public Long getId() {
         return id;
@@ -103,13 +111,13 @@ public class Abastecimento implements Serializable {
         this.valorLitro = valorLitro;
     }
 
-    public double getValorPago() {
-        return qtdeLitros * valorLitro;
-    }
-
-    public void setValorPago(double valorPago) {
-        this.valorPago = valorPago;
-    }
+//    public double getValorPago() {
+//        return qtdeLitros * valorLitro;
+//    }
+//
+//    public void setValorPago(double valorPago) {
+//        this.valorPago = valorPago;
+//    }
 
     public double getQuilometragem() {
         return quilometragem;
@@ -129,16 +137,15 @@ public class Abastecimento implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 83 * hash + (int) (this.usuarioID ^ (this.usuarioID >>> 32));
-        hash = 83 * hash + (int) (this.postoDeCombustivelID ^ (this.postoDeCombustivelID >>> 32));
-        hash = 83 * hash + (this.tipoDeCombustivel != null ? this.tipoDeCombustivel.hashCode() : 0);
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.qtdeLitros) ^ (Double.doubleToLongBits(this.qtdeLitros) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.valorLitro) ^ (Double.doubleToLongBits(this.valorLitro) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.valorPago) ^ (Double.doubleToLongBits(this.valorPago) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.quilometragem) ^ (Double.doubleToLongBits(this.quilometragem) >>> 32));
-        hash = 83 * hash + (this.horario != null ? this.horario.hashCode() : 0);
+        int hash = 7;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 37 * hash + (int) (this.usuarioID ^ (this.usuarioID >>> 32));
+        hash = 37 * hash + (int) (this.postoDeCombustivelID ^ (this.postoDeCombustivelID >>> 32));
+        hash = 37 * hash + (this.tipoDeCombustivel != null ? this.tipoDeCombustivel.hashCode() : 0);
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.qtdeLitros) ^ (Double.doubleToLongBits(this.qtdeLitros) >>> 32));
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.valorLitro) ^ (Double.doubleToLongBits(this.valorLitro) >>> 32));
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.quilometragem) ^ (Double.doubleToLongBits(this.quilometragem) >>> 32));
+        hash = 37 * hash + (this.horario != null ? this.horario.hashCode() : 0);
         return hash;
     }
 
@@ -169,9 +176,6 @@ public class Abastecimento implements Serializable {
         if (Double.doubleToLongBits(this.valorLitro) != Double.doubleToLongBits(other.valorLitro)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.valorPago) != Double.doubleToLongBits(other.valorPago)) {
-            return false;
-        }
         if (Double.doubleToLongBits(this.quilometragem) != Double.doubleToLongBits(other.quilometragem)) {
             return false;
         }
@@ -184,19 +188,8 @@ public class Abastecimento implements Serializable {
         return true;
     }
 
-    
     @Override
     public String toString() {
-        return "Abastecimento{" +
-                "id=" + id +
-                ", usuario=" + usuarioID +
-                ", postoDeCombustivel=" + postoDeCombustivelID +
-                ", tipoDeCombustivel=" + tipoDeCombustivel +
-                ", qtdeLitros=" + qtdeLitros +
-                ", valorLitro=" + valorLitro +
-                ", valorPago=" + valorPago +
-                ", quilometragem=" + quilometragem +
-                ", horario=" + horario +
-                '}';
+        return "Abastecimento{" + "id=" + id + ", usuarioID=" + usuarioID + ", postoDeCombustivelID=" + postoDeCombustivelID + ", tipoDeCombustivel=" + tipoDeCombustivel + ", qtdeLitros=" + qtdeLitros + ", valorLitro=" + valorLitro + ", quilometragem=" + quilometragem + ", horario=" + horario + '}';
     }
 }
